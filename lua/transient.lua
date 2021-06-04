@@ -151,4 +151,36 @@ store.register_keymap({
     }
 })
 
-M.loop(store.get_keymap("gcommit"))
+store.register_keymap({
+    name = "nnn.vim",
+    sections = {
+        {
+            header = "args",
+            type = "infix",
+            options = {
+                {
+                    key = "s",
+                    description = "toggle session style",
+                    option_type = {"none", "local", "global"}
+                }
+            }
+        },
+        {
+            header = "command",
+            type = "suffix",
+            options = {
+                {
+                    key = "r",
+                    description = "run",
+                    cb = function(state) vim.cmd('Np') end
+                }
+            }
+        }
+    }
+})
+
+
+
+M.loop(store.get_keymap("nnn.vim"))
+
+return M
