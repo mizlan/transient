@@ -43,7 +43,11 @@ function update_option(opt)
     if not opt.option_type or opt.option_type == 'toggle' then
         opt.value = opt.value ~= true
     elseif type(opt.option_type) == 'table' then
-        opt.value = (opt.value + 1) % #opt.option_type
+        if opt.value == #opt.option_type then
+            opt.value = 1
+        else
+            opt.value = opt.value + 1
+        end
     elseif opt.option_type == 'input' then
         opt.value = vim.fn.input(opt.prompt or 'transient> ')
     end

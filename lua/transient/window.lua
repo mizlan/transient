@@ -4,7 +4,7 @@ local M = {}
 
 -- setup
 M.ns = vim.api.nvim_create_namespace('transient')
-M.bufnr = vim.api.nvim_create_buf(false, false)
+M.bufnr = vim.api.nvim_create_buf(false, true)
 M.win_lines = vim.api.nvim_get_option('lines') - vim.api.nvim_get_option('cmdheight') - 2
 M.win_cols = vim.api.nvim_get_option('columns') - 4
 -- assume winid is kept after closed
@@ -41,7 +41,7 @@ function M.display_option_value(opt, opt_type)
             return opt, 'StatusLine'
         end
     elseif type(opt_type) == 'table' then
-        return tostring(opt), 'StatusLine'
+        return tostring(opt_type[opt]), 'StatusLine'
     end
     return 'unknown', 'ErrorMsg'
 end
